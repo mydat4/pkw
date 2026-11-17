@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Desain & Kelayakan Usaha Kemasan PKWU XI</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .preview-pattern {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col" x-data="pkwuApp()">
+
+    <!-- Header Navigation -->
+    <header class="bg-emerald-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-emerald-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-box-open text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Simulasi Desain & Analisis Modal PKWU</h1>
+                    <p class="text-xs text-emerald-200">Materi Pengolahan Pangan Nabati - Kelas XI SMA/MA</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-2 text-sm font-medium">
+                <button @click="activeTab = 'materi'" :class="activeTab === 'materi' ? 'bg-emerald-900 text-white shadow' : 'hover:bg-emerald-600'" class="px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-book mr-1.5"></i>Materi</button>
+                <button @click="activeTab = 'simulator'" :class="activeTab === 'simulator' ? 'bg-emerald-900 text-white shadow' : 'hover:bg-emerald-600'" class="px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-sliders mr-1.5"></i>Simulator Desain & Modal</button>
+                <button @click="activeTab = 'kuis'" :class="activeTab === 'kuis' ? 'bg-emerald-900 text-white shadow' : 'hover:bg-emerald-600'" class="px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-circle-question mr-1.5"></i>Kuis Evaluasi</button>
+            </nav>
+        </div>
+        <!-- Mobile Navigation -->
+        <div class="flex md:hidden border-t border-emerald-600 bg-emerald-800">
+            <button @click="activeTab = 'materi'" :class="activeTab === 'materi' ? 'bg-emerald-950 font-bold' : ''" class="flex-1 py-2 text-xs text-center text-white">Materi</button>
+            <button @click="activeTab = 'simulator'" :class="activeTab === 'simulator' ? 'bg-emerald-950 font-bold' : ''" class="flex-1 py-2 text-xs text-center text-white">Simulator</button>
+            <button @click="activeTab = 'kuis'" :class="activeTab === 'kuis' ? 'bg-emerald-950 font-bold' : ''" class="flex-1 py-2 text-xs text-center text-white">Kuis</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full">
+
+        <!-- TAB 1: MATERI PEMBELAJARAN -->
+        <section x-show="activeTab === 'materi'" x-transition class="space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-xl font-bold text-emerald-800 mb-3"><i class="fa-solid fa-layer-group mr-2"></i>1. Klasifikasi & Fungsi Kemasan Pangan</h2>
+                <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                    Pengemasan produk olahan pangan nabati memiliki dua fungsi utama: **Proteksi** (menjaga kualitas, cit Rasa, dan masa simpan) serta **Promosi** (daya tarik visual untuk mendorong keputusan pembelian konsumen).
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+                        <span class="text-xs font-bold bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded">Klasifikasi 01</span>
+                        <h3 class="font-bold text-slate-800 text-sm mt-2">Kemasan Primer</h3>
+                        <p class="text-xs text-slate-600 mt-1">Kemasan yang langsung bersentuhan dengan produk pangan. Contoh: Standing pouch alumunium foil, botol PET, plastik vacuum.</p>
+                    </div>
+                    <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <span class="text-xs font-bold bg-blue-200 text-blue-800 px-2 py-0.5 rounded">Klasifikasi 02</span>
+                        <h3 class="font-bold text-slate-800 text-sm mt-2">Kemasan Sekunder</h3>
+                        <p class="text-xs text-slate-600 mt-1">Kemasan yang melindungi beberapa kemasan primer. Contoh: Dus karton luar isi 12 pouch keripik.</p>
+                    </div>
+                    <div class="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                        <span class="text-xs font-bold bg-purple-200 text-purple-800 px-2 py-0.5 rounded">Klasifikasi 03</span>
+                        <h3 class="font-bold text-slate-800 text-sm mt-2">Kemasan Tersier</h3>
+                        <p class="text-xs text-slate-600 mt-1">Kemasan pengiriman dan pergudangan skala besar. Contoh: Palet kayu & peti kemas kontainer.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rumus Kelayakan Usaha & Modal -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-xl font-bold text-slate-800 mb-3"><i class="fa-solid fa-calculator text-emerald-600 mr-2"></i>2. Rumus Perhitungan Modal, HPP, & Harga Jual</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="p-4 bg-slate-50 border rounded-lg space-y-2">
+                        <h3 class="font-bold text-slate-800 text-sm">Rumus HPP Total per Unit:</h3>
+                        <div class="bg-white p-2.5 rounded font-mono border font-semibold text-slate-700">
+                            HPP Unit = (Biaya Pangan + Biaya Kemasan) per unit
+                        </div>
+                        <p class="text-slate-500">Menjumlahkan modal bahan baku olahan nabati dengan harga bahan kemasan.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 border rounded-lg space-y-2">
+                        <h3 class="font-bold text-slate-800 text-sm">Rumus Penentuan Harga Jual:</h3>
+                        <div class="bg-white p-2.5 rounded font-mono border font-semibold text-emerald-700">
+                            Harga Jual = HPP Unit + (HPP Unit × % Margin Keuntungan)
+                        </div>
+                        <p class="text-slate-500">Margin usaha pangan nabati umumnya berkisar antara **20% hingga 50%**.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: SIMULATOR DESAIN, ILUSTRASI & KALKULATOR MODAL -->
+        <section x-show="activeTab === 'simulator'" x-transition class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- PANEL KONTROL INPUT (5 Kolom) -->
+            <div class="lg:col-span-5 bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
+                
+                <!-- Section 1: Identitas Brand & Ilustrasi Gambar -->
+                <div class="space-y-3 border-b pb-4">
+                    <h2 class="text-sm font-bold text-emerald-800 uppercase tracking-wide"><i class="fa-solid fa-pen-nib mr-2"></i>1. Brand & Ilustrasi Gambar</h2>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Brand / Merk</label>
+                        <input type="text" x-model="brandName" placeholder="Contoh: BananaCrisp" class="w-full text-sm p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 font-semibold">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Deskripsi Ringkas Produk</label>
+                        <input type="text" x-model="productTagline" placeholder="Contoh: Keripik Pisang Cokelat" class="w-full text-sm p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
+                    </div>
+
+                    <!-- PILIHAN ILUSTRASI GAMBAR -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Ilustrasi Gambar Kemasan</label>
+                        <div class="grid grid-cols-4 gap-2 mb-2">
+                            <template x-for="(img, key) in presetImages" :key="key">
+                                <button @click="selectedImage = img.url" :class="selectedImage === img.url ? 'ring-2 ring-emerald-600 bg-emerald-50' : 'bg-slate-50 hover:bg-slate-100'" class="p-1.5 rounded-lg border text-center transition">
+                                    <span class="text-xl block" x-text="img.icon"></span>
+                                    <span class="text-[9px] font-medium block truncate" x-text="img.label"></span>
+                                </button>
+                            </template>
+                        </div>
+
+                        <!-- Unggah Foto Sendiri -->
+                        <div class="mt-2">
+                            <label class="block text-[11px] text-slate-500 mb-1">Atau Upload Gambar Sendiri (PNG/JPG):</label>
+                            <input type="file" @change="handleImageUpload($event)" accept="image/*" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
+                        </div>
+                    </div>
+
+                    <!-- Pilihan Warna Label -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Skema Warna Label</label>
+                        <div class="flex space-x-2">
+                            <template x-for="(color, key) in themeColors" :key="key">
+                                <button @click="selectedColor = key" :class="selectedColor === key ? 'ring-2 ring-offset-1 ring-slate-800 scale-105' : ''" :style="'background-color: ' + color.hex" class="w-7 h-7 rounded-full transition shadow-sm"></button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Material & Modal Finansial -->
+                <div class="space-y-3">
+                    <h2 class="text-sm font-bold text-emerald-800 uppercase tracking-wide"><i class="fa-solid fa-coins mr-2"></i>2. Material & Perhitungan Modal</h2>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Bentuk & Material Kemasan</label>
+                        <select x-model="selectedMaterial" class="w-full text-sm p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
+                            <template x-for="(mat, key) in materials" :key="key">
+                                <option :value="key" x-text="mat.name"></option>
+                            </template>
+                        </select>
+                    </div>
+
+                    <!-- Input Total Modal Awal -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Total Modal Awal Usaha (Rp)</label>
+                        <input type="number" x-model.number="capitalInput" step="50000" class="w-full text-sm p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 font-semibold">
+                    </div>
+
+                    <!-- Input Modal Bahan Pangan per Unit -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Biaya Olahan Pangan / Unit (Rp)</label>
+                        <input type="number" x-model.number="foodUnitCost" step="500" class="w-full text-sm p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
+                    </div>
+
+                    <!-- Input Target Margin Keuntungan % -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-xs font-semibold text-slate-600">Target Margin Keuntungan (%)</label>
+                            <span class="text-xs font-bold text-emerald-600" x-text="profitMargin + '%'"></span>
+                        </div>
+                        <input type="range" min="10" max="100" step="5" x-model.number="profitMargin" class="w-full accent-emerald-600">
+                    </div>
+
+                    <!-- Input Batch Produksi -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-xs font-semibold text-slate-600">Volume Produksi Target</label>
+                            <span class="text-xs font-bold text-emerald-600" x-text="quantity + ' Unit'"></span>
+                        </div>
+                        <input type="range" min="100" max="5000" step="100" x-model.number="quantity" class="w-full accent-emerald-600">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PANEL VISUAL MOCKUP & KEUANGAN (7 Kolom) -->
+            <div class="lg:col-span-7 space-y-6">
+                
+                <!-- PREVIEW MOCKUP KEMASAN BERILUSTRASI -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="text-md font-bold text-slate-800"><i class="fa-solid fa-eye text-emerald-600 mr-2"></i>Mockup Visual Kemasan Produk</h2>
+                        <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono font-bold">Preview Interaktif</span>
+                    </div>
+
+                    <!-- Area Render Kemasan -->
+                    <div class="preview-pattern border-2 border-dashed border-slate-300 rounded-xl p-6 flex justify-center items-center h-84 relative bg-slate-50">
+                        
+                        <!-- MOCKUP 1: Standing Pouch -->
+                        <div x-show="selectedMaterial === 'alubag' || selectedMaterial === 'papercraft'" class="transition-all duration-300">
+                            <div :style="'background-color: ' + (selectedMaterial === 'papercraft' ? '#d7ccc8' : '#cfd8dc')" class="w-52 h-72 rounded-b-2xl rounded-t-lg border-2 border-slate-400 shadow-2xl relative flex flex-col justify-between p-3 overflow-hidden">
+                                <div class="w-full h-3 border-b-2 border-slate-400 border-dashed flex justify-between items-center px-1">
+                                    <div class="w-2 h-2 rounded-full bg-slate-400"></div>
+                                    <div class="w-2 h-2 rounded-full bg-slate-400"></div>
+                                </div>
+
+                                <!-- Label Brand dengan Ilustrasi Gambar -->
+                                <div :style="'background-color: ' + themeColors[selectedColor].hex" class="w-full p-3 rounded-xl text-white shadow-md text-center my-auto border border-white/30 flex flex-col items-center">
+                                    <!-- Elemen Ilustrasi Gambar Produk -->
+                                    <div class="w-16 h-16 bg-white/90 rounded-full p-1 mb-1 shadow-inner flex items-center justify-center overflow-hidden">
+                                        <img :src="selectedImage" class="w-full h-full object-cover rounded-full" alt="Ilustrasi Produk">
+                                    </div>
+                                    <div class="font-black text-sm uppercase tracking-wide leading-tight" x-text="brandName || 'NAMA BRAND'"></div>
+                                    <div class="text-[10px] opacity-90 italic mt-0.5" x-text="productTagline || 'Keterangan Produk'"></div>
+                                    <div class="mt-2 text-[8px] bg-black/20 rounded px-2 py-0.5 font-mono">Netto: 150g | P-IRT OK</div>
+                                </div>
+
+                                <div class="w-full flex justify-between items-end text-[8px] text-slate-600 font-bold px-1">
+                                    <span>BPOM RI MD</span>
+                                    <i class="fa-solid fa-barcode text-base"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MOCKUP 2: Botol PET Transparan -->
+                        <div x-show="selectedMaterial === 'pet'" class="transition-all duration-300 flex flex-col items-center">
+                            <div :style="'background-color: ' + themeColors[selectedColor].hex" class="w-14 h-5 rounded-t-md border-2 border-slate-500"></div>
+                            <div class="w-10 h-3 bg-slate-200 border-x-2 border-slate-400"></div>
+                            <div class="w-44 h-64 bg-blue-50/70 rounded-b-3xl rounded-t-xl border-2 border-slate-400 shadow-xl relative flex flex-col justify-center items-center p-2 backdrop-blur-xs overflow-hidden">
+                                <div :style="'background-color: ' + themeColors[selectedColor].hex + '33'" class="absolute bottom-0 left-0 right-0 h-48"></div>
+                                
+                                <!-- Label Melingkar pada Botol -->
+                                <div :style="'background-color: ' + themeColors[selectedColor].hex" class="w-full py-2 px-1 rounded text-white shadow-md text-center z-10 flex flex-col items-center">
+                                    <div class="w-12 h-12 bg-white rounded-full p-0.5 mb-1 shadow overflow-hidden">
+                                        <img :src="selectedImage" class="w-full h-full object-cover rounded-full" alt="Ilustrasi">
+                                    </div>
+                                    <div class="font-bold text-xs uppercase" x-text="brandName || 'BRAND MINUMAN'"></div>
+                                    <div class="text-[8px] opacity-90" x-text="productTagline || 'Sari Buah Alami'"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MOCKUP 3: Plastik Vacuum -->
+                        <div x-show="selectedMaterial === 'vacuum'" class="transition-all duration-300">
+                            <div class="w-52 h-68 bg-emerald-50/50 rounded-lg border-2 border-slate-300 shadow-xl relative flex flex-col justify-between p-3 overflow-hidden">
+                                <div :style="'background-color: ' + themeColors[selectedColor].hex" class="w-full p-3 rounded-lg text-white text-center shadow flex flex-col items-center">
+                                    <div class="w-14 h-14 bg-white rounded-full p-0.5 mb-1 shadow overflow-hidden">
+                                        <img :src="selectedImage" class="w-full h-full object-cover rounded-full" alt="Ilustrasi">
+                                    </div>
+                                    <div class="font-bold text-xs uppercase" x-text="brandName || 'BRAND BASAH'"></div>
+                                    <div class="text-[9px]" x-text="productTagline || 'Olahan Vacuum'"></div>
+                                </div>
+                                <div class="bg-white/90 p-2 rounded text-center text-[9px] border border-slate-200">
+                                    <span class="font-bold text-slate-700">Vacuum Sealed Food</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- HASIL ANALISIS FINANSIAL & KELAYAKAN MODAL -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h2 class="text-md font-bold text-slate-800 border-b pb-2"><i class="fa-solid fa-chart-pie text-emerald-600 mr-2"></i>Analisis Modal & Kelayakan Keuangan</h2>
+
+                    <!-- Grid Metrik Finansial Utama -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                        <div class="p-3 bg-slate-50 border rounded-lg">
+                            <span class="text-[11px] text-slate-500 block">Biaya Kemasan</span>
+                            <span class="text-sm font-bold text-slate-800" x-text="formatRupiah(packagingUnitCost)"></span>
+                        </div>
+                        <div class="p-3 bg-slate-50 border rounded-lg">
+                            <span class="text-[11px] text-slate-500 block">HPP Total / Unit</span>
+                            <span class="text-sm font-bold text-emerald-700" x-text="formatRupiah(totalHppUnit)"></span>
+                        </div>
+                        <div class="p-3 bg-slate-50 border rounded-lg">
+                            <span class="text-[11px] text-slate-500 block">Harga Jual Saran</span>
+                            <span class="text-sm font-bold text-blue-700" x-text="formatRupiah(sellingPrice)"></span>
+                        </div>
+                        <div class="p-3 bg-slate-50 border rounded-lg">
+                            <span class="text-[11px] text-slate-500 block">Laba / Unit</span>
+                            <span class="text-sm font-bold text-purple-700" x-text="formatRupiah(profitPerUnit)"></span>
+                        </div>
+                    </div>
+
+                    <!-- Proyeksi Penggunaan Modal & Omzet -->
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200 space-y-2 text-xs">
+                        <div class="flex justify-between">
+                            <span>Total Kebutuhan Modal Produksi Batch:</span>
+                            <span class="font-bold text-slate-800" x-text="formatRupiah(totalBatchCost)"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Sisa Modal Cadangan Usaha:</span>
+                            <span class="font-bold" :class="capitalRemaining >= 0 ? 'text-emerald-700' : 'text-red-600'" x-text="formatRupiah(capitalRemaining)"></span>
+                        </div>
+                        <div class="flex justify-between border-t border-emerald-200 pt-2 font-bold text-sm">
+                            <span>Proyeksi Total Omzet (Penjualan):</span>
+                            <span class="text-emerald-800" x-text="formatRupiah(totalRevenue)"></span>
+                        </div>
+                    </div>
+
+                    <!-- Indikator Beban Kemasan terhadap HPP -->
+                    <div class="flex items-center justify-between text-xs p-3 bg-slate-50 rounded-lg border">
+                        <span>Rasio Kemasan terhadap HPP Total:</span>
+                        <span class="font-bold" :class="packagingRatio <= 15 ? 'text-emerald-600' : 'text-red-600'" x-text="packagingRatio.toFixed(1) + '% (Batas Ideal < 15%)'"></span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 3: KUIS EVALUASI -->
+        <section x-show="activeTab === 'kuis'" x-transition class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
+            <div x-show="!quizSubmitted">
+                <div class="flex justify-between items-center border-b pb-3 mb-4">
+                    <h2 class="font-bold text-slate-800"><i class="fa-solid fa-clipboard-question text-emerald-600 mr-2"></i>Evaluasi Pemahaman Siswa</h2>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full font-bold" x-text="'Soal ' + (currentQuestion + 1) + ' dari ' + quizData.length"></span>
+                </div>
+
+                <p class="text-sm font-semibold text-slate-800 mb-4 leading-relaxed" x-text="quizData[currentQuestion].question"></p>
+
+                <div class="space-y-2 mb-6">
+                    <template x-for="(option, idx) in quizData[currentQuestion].options" :key="idx">
+                        <button @click="userAnswers[currentQuestion] = idx" 
+                                :class="userAnswers[currentQuestion] === idx ? 'border-emerald-600 bg-emerald-50 text-emerald-900 font-semibold' : 'border-slate-200 hover:bg-slate-50'" 
+                                class="w-full text-left p-3 text-xs sm:text-sm rounded-lg border transition flex items-center justify-between">
+                            <span x-text="option"></span>
+                            <i x-show="userAnswers[currentQuestion] === idx" class="fa-solid fa-circle-check text-emerald-600"></i>
+                        </button>
+                    </template>
+                </div>
+
+                <div class="flex justify-between">
+                    <button @click="currentQuestion--" :disabled="currentQuestion === 0" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-200 text-slate-700 disabled:opacity-40">Sebelumnya</button>
+                    <button x-show="currentQuestion < quizData.length - 1" @click="currentQuestion++" :disabled="userAnswers[currentQuestion] === undefined" class="px-4 py-2 text-xs font-semibold rounded-lg bg-emerald-600 text-white disabled:opacity-40">Selanjutnya</button>
+                    <button x-show="currentQuestion === quizData.length - 1" @click="submitQuiz()" :disabled="userAnswers.includes(undefined)" class="px-4 py-2 text-xs font-semibold rounded-lg bg-emerald-700 text-white disabled:opacity-40">Selesai & Lihat Nilai</button>
+                </div>
+            </div>
+
+            <!-- Tampilan Hasil Kuis -->
+            <div x-show="quizSubmitted" class="text-center py-6 space-y-4">
+                <i class="fa-solid fa-award text-5xl text-amber-400"></i>
+                <h3 class="text-xl font-bold text-slate-800">Hasil Evaluasi Pembelajaran</h3>
+                <p class="text-xs text-slate-600">Nilai Akhir Anda:</p>
+                <div class="text-5xl font-black text-emerald-600" x-text="quizScore"></div>
+                <button @click="resetQuiz()" class="px-6 py-2 bg-emerald-600 text-white font-bold text-xs rounded-lg hover:bg-emerald-700 transition">Ulangi Kuis</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 text-xs py-4 text-center mt-auto">
+        <p>Aplikasi Media Pembelajaran Interaktif PKWU Kelas XI — Desain Kemasan & Analisis Modal Pangan Nabati</p>
+    </footer>
+
+    <!-- Logika Interaktif Alpine.js -->
+    <script>
+        function pkwuApp() {
+            return {
+                activeTab: 'simulator',
+                
+                // Form Identitas & Visual
+                brandName: 'CRISPY BANANA',
+                productTagline: 'Keripik Pisang Renyah Natural',
+                selectedMaterial: 'alubag',
+                selectedColor: 'emerald',
+                selectedImage: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=150&auto=format&fit=crop&q=80',
+
+                // Form Modal Finansial
+                capitalInput: 2000000,
+                foodUnitCost: 6500,
+                profitMargin: 30,
+                quantity: 500,
+
+                // Preset Gambar Ilustrasi Produk
+                presetImages: [
+                    { label: 'Keripik', icon: '🍌', url: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=150&auto=format&fit=crop&q=80' },
+                    { label: 'Jus/Sari Buah', icon: '🍊', url: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?w=150&auto=format&fit=crop&q=80' },
+                    { label: 'Manisan/Basah', icon: '🥭', url: 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=150&auto=format&fit=crop&q=80' },
+                    { label: 'Teh Herbal', icon: '🍵', url: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=150&auto=format&fit=crop&q=80' }
+                ],
+
+                themeColors: {
+                    emerald: { name: 'Hijau', hex: '#059669' },
+                    amber: { name: 'Kuning', hex: '#d97706' },
+                    red: { name: 'Merah', hex: '#dc2626' },
+                    purple: { name: 'Ungu', hex: '#7c3aed' },
+                    blue: { name: 'Biru', hex: '#0284c7' }
+                },
+
+                materials: {
+                    alubag: { name: 'Standing Pouch Alumunium Foil', basePrice: 1200 },
+                    pet: { name: 'Botol Plastik PET Food Grade 250ml', basePrice: 1500 },
+                    vacuum: { name: 'Plastik Vacuum Nylon Kedap Udara', basePrice: 800 },
+                    papercraft: { name: 'Standing Pouch Paper Kraft Eco', basePrice: 1000 }
+                },
+
+                // Handler Upload Foto Gambar dari HP/Laptop Siswa
+                handleImageUpload(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            this.selectedImage = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                },
+
+                // Getters Perhitungan Otomatis
+                get packagingUnitCost() {
+                    let base = this.materials[this.selectedMaterial].basePrice;
+                    let discount = this.quantity >= 2000 ? 0.75 : (this.quantity >= 1000 ? 0.85 : 1.0);
+                    return Math.round(base * discount);
+                },
+
+                get totalHppUnit() {
+                    return this.foodUnitCost + this.packagingUnitCost;
+                },
+
+                get sellingPrice() {
+                    return Math.round(this.totalHppUnit * (1 + (this.profitMargin / 100)));
+                },
+
+                get profitPerUnit() {
+                    return this.sellingPrice - this.totalHppUnit;
+                },
+
+                get totalBatchCost() {
+                    return this.totalHppUnit * this.quantity;
+                },
+
+                get capitalRemaining() {
+                    return this.capitalInput - this.totalBatchCost;
+                },
+
+                get totalRevenue() {
+                    return this.sellingPrice * this.quantity;
+                },
+
+                get packagingRatio() {
+                    return this.totalHppUnit > 0 ? (this.packagingUnitCost / this.totalHppUnit) * 100 : 0;
+                },
+
+                formatRupiah(val) {
+                    return 'Rp ' + val.toLocaleString('id-ID');
+                },
+
+                // Kuis Evaluasi
+                currentQuestion: 0,
+                userAnswers: [],
+                quizSubmitted: false,
+                quizScore: 0,
+                quizData: [
+                    {
+                        question: "Jika HPP total satu kemasan keripik adalah Rp 10.000 dan produsen menginginkan margin laba 30%, berapa harga jualnya?",
+                        options: ["Rp 11.000", "Rp 13.000", "Rp 15.000", "Rp 18.000"],
+                        correct: 1
+                    },
+                    {
+                        question: "Fungsi dari ilustrasi foto produk yang jelas pada kemasan adalah...",
+                        options: [
+                            "Meningkatkan kelezatan makanan secara otomatis",
+                            "Memberikan gambaran visual nyata produk untuk menarik calon pembeli",
+                            "Mengurangi biaya produksi kemasan",
+                            "Menggantikan syarat izin legalitas P-IRT"
+                        ],
+                        correct: 1
+                    },
+                    {
+                        question: "Di bawah ini yang termasuk biaya variabel dalam perhitungan modal HPP usaha pangan adalah...",
+                        options: ["Biaya bahan baku pangan & bahan kemasan", "Sewa tempat usaha tahunan", "Pembelian mesin produksi utama", "Biaya perizinan BPOM"],
+                        correct: 0
+                    }
+                ],
+
+                submitQuiz() {
+                    let score = 0;
+                    this.userAnswers.forEach((ans, i) => {
+                        if (ans === this.quizData[i].correct) score++;
+                    });
+                    this.quizScore = Math.round((score / this.quizData.length) * 100);
+                    this.quizSubmitted = true;
+                },
+
+                resetQuiz() {
+                    this.currentQuestion = 0;
+                    this.userAnswers = [];
+                    this.quizSubmitted = false;
+                    this.quizScore = 0;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
